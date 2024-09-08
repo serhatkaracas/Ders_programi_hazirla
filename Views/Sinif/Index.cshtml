@@ -1,0 +1,44 @@
+﻿@model IEnumerable<WebProjeOdev.Models.Sinif>
+
+@{
+    Layout = "_Layout";
+}
+
+<h2>Sınıf Listesi</h2>
+<div style="text-align: center;">
+    <img src="~/images/siniflar.jpeg" alt="Sınflar" height="100" width="200" />
+</div>
+<div class="container">
+    @if (User.IsInRole("ADMIN"))
+    {
+        <a asp-controller="Sinif" asp-action="SinifGetir" class="btn btn-primary mt-3">Sınıf Ekle</a>
+    }
+    <table class="table mt-3">
+        <thead>
+            <tr>
+                <th>Sınıf Seviyesi</th>
+                <th>Mevcut</th>
+                @if (User.IsInRole("ADMIN"))
+                {
+                    <th>İşlemler</th>
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var sinif in Model)
+            {
+                <tr>
+                    <td>@sinif.SinifSeviyesi</td>
+                    <td>@sinif.Mevcut</td>
+                    @if (User.IsInRole("ADMIN"))
+                    {
+                        <td>
+                            <a asp-controller="Sinif" asp-action="Edit" asp-route-id="@sinif.SinifID" class="btn btn-primary">Güncelle</a>
+                            <a asp-controller="Sinif" asp-action="Delete" asp-route-id="@sinif.SinifID" class="btn btn-danger">Sil</a>
+                        </td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

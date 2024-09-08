@@ -1,0 +1,74 @@
+﻿@model WebProjeOdev.Models.VMLogin
+@{
+    Layout = null;
+}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Login</title>
+    <!-- Custom Theme files -->
+    <link href="/web/css/style.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="/web/css/font-awesome.css" rel="stylesheet"> <!-- Font-Awesome-Icons-CSS -->
+    <!-- web font -->
+    <link href="//fonts.googleapis.com/css?family=Vollkorn+SC:400,600,700,900&amp;subset=cyrillic,cyrillic-ext,latin-ext,vietnamese" rel="stylesheet">
+    <link href="//fonts.googleapis.com/css?family=Acme" rel="stylesheet">
+    <!-- //web font -->
+    <style>
+        /* Bu stil, .text-danger sınıfını sayfanın her yerinde etkili hale getirir */
+        .text-danger {
+            color: red !important; /* !important ile stilin üstünlüğünü sağlar */
+            font-size: 1rem; /* Metin boyutunu belirler */
+            margin-top: 10px; /* Üstten boşluk ekler */
+        }
+    </style>
+
+
+</head>
+<body>
+    <div class="main">
+        <h1>Akıllı Ders Programı</h1>
+        <div class="main-w3lsrow">
+            <!-- login form -->
+            <div class="login-form login-form-left">
+                <div class="agile-row">
+                    <h2>Giriş yapınız</h2>
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                    <div class="login-agileits-top">
+                        <form asp-controller="Access" asp-action="Login" method="post">
+                            <p>Mail adresi </p>
+                            <input type="text" class="Email" name="Email" required="" placeholder="Email adresiniz"/>
+                            <p>Şifre</p>
+                            <input type="password" class="Sifre" name="Sifre" required="" placeholder="Şifreniz"/>
+                            <label class="anim">
+                                <input type="checkbox" class="checkbox" name="KeepLoggedIn">
+                                <span> Beni hatırla </span>
+                            </label>
+                            <input type="submit" value="Login">
+                        </form>
+                    </div>
+                    <div class="login-agileits-bottom">
+                        <h6><a href="#">Şifremi unuttum</a></h6>
+                        </br>
+                        <a asp-controller="Account" asp-action="Register" class="btn btn-primary">Üye değilim</a>
+                    </div>
+                    <div class="social_icons agileinfo">
+                        <ul class="top-links">
+                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                            <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                            <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+

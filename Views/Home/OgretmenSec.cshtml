@@ -1,0 +1,18 @@
+﻿@{
+    ViewData["Title"] = "Öğretmen Seç";
+}
+
+<h2>Öğretmen Seç</h2>
+
+<form asp-controller="Home" asp-action="OgretmenDersProgramiHazirla" method="post">
+    <div class="form-group">
+        <label for="ogretmenId">Öğretmen Seçin:</label>
+        <select id="ogretmenId" name="ogretmenId" class="form-control">
+            @foreach (var ogretmen in ViewBag.Ogretmenler)
+            {
+                <option value="@ogretmen.OgretmenID">@ogretmen.AdSoyad</option>
+            }
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Ders Programını Hazırla</button>
+</form>

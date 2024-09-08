@@ -1,0 +1,53 @@
+﻿@model IEnumerable<WebProjeOdev.Models.Ders>
+
+@{
+    Layout = "_Layout";
+}
+<div>
+    <img src="~/images/dersler.jpeg" alt="dersler" height="100" width="100" />
+    <a href="https://obs.mu.edu.tr/oibs/bologna/index.aspx?lang=tr&curOp=showPac&curUnit=16&curSunit=1656#">Ders bilgi paketi için tıklayınız</a>
+</div>
+<h2>Ders Listesi</h2>
+
+<div class="container">
+    @if (User.IsInRole("ADMIN"))
+    {
+        <a asp-controller="Ders" asp-action="DersGetir" class="btn btn-primary mt-3">Ders Ekle</a>
+    }
+    <table class="table mt-3">
+        <thead>
+            <tr>
+                <th>Ders Adı</th>
+                <th>Öğretmen</th>
+                <th>Sınıf</th>
+                <th>Derslik</th>
+                <th>Gün</th>
+                <th>Saat</th>
+                @if (User.IsInRole("ADMIN"))
+                {
+                    <th>İşlemler</th>
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var ders in Model)
+            {
+                <tr>
+                    <td>@ders.DersAdi</td>
+                    <td>@ders.Ogretmen?.AdSoyad</td>
+                    <td>@ders.Sinif?.SinifSeviyesi</td>
+                    <td>@ders.Derslik?.DerslikAdi</td>
+                    <td>@ders.Gun</td>
+                    <td>@ders.Saat</td>
+                    @if (User.IsInRole("ADMIN"))
+                    {
+                        <td>
+                            <a asp-controller="Ders" asp-action="Edit" asp-route-id="@ders.Id" class="btn btn-primary">Güncelle</a>
+                            <a asp-controller="Ders" asp-action="Delete" asp-route-id="@ders.Id" class="btn btn-danger">Sil</a>
+                        </td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

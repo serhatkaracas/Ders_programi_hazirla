@@ -1,0 +1,43 @@
+﻿@model IEnumerable<WebProjeOdev.Models.Ogretmen>
+
+@{
+    Layout = "_Layout";
+}
+
+<h2>Öğretmen Listesi</h2>
+<div>
+    <img src="~/images/hocalar.jpeg" alt="Öğretmenler" height="100" width="100" />
+    <a href="https://bilisimsistemleri.mu.edu.tr/tr/personel/akademik">Öğretim üyeleri hakkında ayrıntılı bilgi için tıklayınız</a>
+</div>
+<div class="container">
+    @if (User.IsInRole("ADMIN"))
+    {
+        <a asp-controller="Ogretmen" asp-action="OgretmenGetir" class="btn btn-primary mt-3">Öğretmen Ekle</a>
+    }
+    <table class="table mt-3">
+        <thead>
+            <tr>
+                <th>Ad Soyad</th>
+                 @if (User.IsInRole("ADMIN"))
+                {
+                    <th>İşlemler</th>
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var ogretmen in Model)
+            {
+                <tr>
+                    <td>@ogretmen.AdSoyad</td>
+                    @if (User.IsInRole("ADMIN"))
+                    {
+                        <td>
+                            <a asp-controller="Ogretmen" asp-action="Edit" asp-route-id="@ogretmen.OgretmenID" class="btn btn-primary">Güncelle</a>
+                            <a asp-controller="Ogretmen" asp-action="Delete" asp-route-id="@ogretmen.OgretmenID" class="btn btn-danger">Sil</a>
+                        </td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

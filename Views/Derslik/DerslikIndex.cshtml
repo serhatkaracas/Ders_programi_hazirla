@@ -1,0 +1,44 @@
+﻿    @model IEnumerable<WebProjeOdev.Models.Derslik>
+
+    @{
+        Layout = "_Layout";
+    }
+    <div>
+        <center><img src="~/images/derslik.jpeg" alt="derslikler" height="100" width="100" /></center>
+    </div>
+    <h2>Derslik Listesi</h2>
+
+    <div class="container">
+        @if (User.IsInRole("ADMIN"))
+        {
+            <a asp-controller="Derslik" asp-action="DerslikGetir" class="btn btn-primary mt-3">Derslik Ekle</a>
+        }
+        <table class="table mt-3">
+            <thead>
+                <tr>
+                    <th>Derslik Adı</th>
+                    <th>Kapasite</th>
+                    @if (User.IsInRole("ADMIN"))
+                    {
+                        <th>İşlemler</th>
+                    }
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var derslik in Model)
+                {
+                    <tr>
+                        <td>@derslik.DerslikAdi</td>
+                        <td>@derslik.Kapasite</td>
+                        @if (User.IsInRole("ADMIN"))
+                        {
+                            <td>
+                                <a asp-controller="Derslik" asp-action="Edit" asp-route-id="@derslik.DerslikID" class="btn btn-primary">Güncelle</a>
+                                <a asp-controller="Derslik" asp-action="Delete" asp-route-id="@derslik.DerslikID" class="btn btn-danger">Sil</a>
+                            </td>
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>

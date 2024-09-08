@@ -1,0 +1,18 @@
+﻿@{
+    ViewData["Title"] = "Sınıf Seç";
+}
+
+<h2>Sınıf Seç</h2>
+
+<form asp-controller="Home" asp-action="DersProgramiHazirla" method="post">
+    <div class="form-group">
+        <label for="sinifId">Sınıf Seçin:</label>
+        <select id="sinifId" name="sinifId" class="form-control">
+            @foreach (var sinif in ViewBag.Siniflar)
+            {
+                <option value="@sinif.SinifID">@sinif.SinifSeviyesi</option>
+            }
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Ders Programını Hazırla</button>
+</form>

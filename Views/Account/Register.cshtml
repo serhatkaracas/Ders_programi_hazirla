@@ -1,0 +1,48 @@
+﻿@model WebProjeOdev.Models.Kullanici
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Login</title>
+    <!-- Custom Theme files -->
+    <link href="/web/css/style.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="/web/css/font-awesome.css" rel="stylesheet"> <!-- Font-Awesome-Icons-CSS -->
+    <!-- web font -->
+    <link href="//fonts.googleapis.com/css?family=Vollkorn+SC:400,600,700,900&amp;subset=cyrillic,cyrillic-ext,latin-ext,vietnamese" rel="stylesheet">
+    <link href="//fonts.googleapis.com/css?family=Acme" rel="stylesheet">
+    <!-- //web font -->
+</head>
+<body>
+    <div class="main">
+        <h1>Akıllı Ders Programı</h1>
+        <div class="main-w3lsrow">
+            <!-- login form -->
+            <div class="login-form login-form-left">
+                <div class="agile-row">
+                    <h2>Kayıt olunuz</h2>
+                    <div class="login-agileits-top">
+                        <form asp-controller="Account" asp-action="Register" method="post">
+                            <p>Kullanıcı adı </p>
+                            <input type="text" class="KullaniciAdi" name="KullaniciAdi" required="" placeholder="Kullanıcı Adınız" />
+                            <p>Mail adresi </p>
+                            <input type="text" class="Email" name="Email" required="" placeholder="Email adresiniz" />
+                            <p>Şifre</p>
+                            <input type="password" class="Sifre" name="Sifre" required="" placeholder="Şifreniz" />
+                            <input type="submit" value="Kayıt ol">
+                            <br />
+                            <a asp-controller="Access" asp-action="Login" class="btn btn-primary">Giriş yap</a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+

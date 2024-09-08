@@ -1,0 +1,60 @@
+﻿@model WebProjeOdev.Models.Sinif
+
+@{
+    ViewData["Title"] = "Ders Programı";
+}
+
+<h2>Ders Programı - @Model.SinifSeviyesi</h2>
+
+<div class="table-responsive">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Saat</th>
+                <th>Pazartesi</th>
+                <th>Salı</th>
+                <th>Çarşamba</th>
+                <th>Perşembe</th>
+                <th>Cuma</th>
+                <th>Cumartesi</th>
+                <th>Pazar</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (int hour = 8; hour < 18; hour++)
+            {
+                for (int minute = 0; minute < 60; minute += 30)
+                {
+                    var time = string.Format("{0:D2}:{1:D2}", hour, minute);
+                    <tr>
+                        <td>@time</td>
+                        @foreach (var day in new[] { "Pazartesi", "Salı", "Çarşamba", "Perşembe", "Cuma", "Cumartesi", "Pazar" })
+                        {
+                            var ders = Model.Dersler.FirstOrDefault(d => d.Gun == day && d.Saat == time);
+
+                            if (ders != null)
+                            {
+                                var startHour = int.Parse(ders.Saat.Split(':')[0]);
+                                var startMinute = int.Parse(ders.Saat.Split(':')[1]);
+                                var endHour = startHour + (ders.ToplamSaat ?? 1);
+                                var endMinute = startMinute;
+                                var rowspan = ((endHour - startHour) * 2) + (endMinute > 0 ? 1 : 0);
+
+                                <td rowspan="@rowspan">
+                                    <strong>@ders.DersAdi</strong><br />
+                                    <em>@ders.Derslik?.DerslikAdi</em><br />
+                                    <span>@ders.Ogretmen?.AdSoyad</span><br />
+                                    <span>@time - @string.Format("{0:D2}:{1:D2}", endHour, endMinute)</span>
+                                </td>
+                            }
+                            else if (!Model.Dersler.Any(d => d.Gun == day && int.Parse(d.Saat.Split(':')[0]) <= hour && (int.Parse(d.Saat.Split(':')[0]) + (d.ToplamSaat ?? 1)) > hour))
+                            {
+                                <td></td>
+                            }
+                        }
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>

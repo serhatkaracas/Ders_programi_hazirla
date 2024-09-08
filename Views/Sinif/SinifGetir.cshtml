@@ -1,0 +1,33 @@
+﻿@model WebProjeOdev.Models.Sinif
+
+@{
+    Layout = "_Layout";
+}
+
+<h2>Sınıf Ekle</h2>
+
+@if (User.IsInRole("ADMIN"))
+{
+    <div class="container">
+        <form asp-controller="Sinif" asp-action="SinifGetir" method="post">
+            <input asp-for="SinifID" type="hidden" />
+            <div class="form-group">
+                <label asp-for="SinifSeviyesi" class="control-label"></label>
+                <input asp-for="SinifSeviyesi" class="form-control" />
+                <span asp-validation-for="SinifSeviyesi" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Mevcut" class="control-label"></label>
+                <input asp-for="Mevcut" class="form-control" />
+                <span asp-validation-for="Mevcut" class="text-danger"></span>
+            </div>
+            <button type="submit" class="btn btn-primary">Kaydet</button>
+        </form>
+    </div>
+}
+else
+{
+    <div class="alert alert-danger" role="alert">
+        Bu sayfaya erişim yetkiniz yok.
+    </div>
+}

@@ -1,0 +1,33 @@
+﻿@model WebProjeOdev.Models.Derslik
+
+@{
+    Layout = "_Layout";
+}
+
+<h2>Derslik Güncelle</h2>
+
+@if (User.IsInRole("ADMIN"))
+{
+    <div class="container">
+        <form asp-controller="Derslik" asp-action="Edit" method="post">
+            <input asp-for="DerslikID" type="hidden" />
+            <div class="form-group">
+                <label asp-for="DerslikAdi" class="control-label"></label>
+                <input asp-for="DerslikAdi" class="form-control" />
+                <span asp-validation-for="DerslikAdi" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Kapasite" class="control-label"></label>
+                <input asp-for="Kapasite" class="form-control" />
+                <span asp-validation-for="Kapasite" class="text-danger"></span>
+            </div>
+            <button type="submit" class="btn btn-primary">Güncelle</button>
+        </form>
+    </div>
+}
+else
+{
+    <div class="alert alert-danger" role="alert">
+        Bu sayfaya erişim yetkiniz yok.
+    </div>
+}
